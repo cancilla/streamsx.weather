@@ -1,6 +1,6 @@
 # streamsx.weather
 
-Toolkit for accessing data from the Insights for Weather Bluemix service.  
+Toolkit for accessing data from the [Insights for Weather Bluemix Service](https://console.ng.bluemix.net/catalog/services/insights-for-weather).  
 
 To learn more about how this toolkit can be used:
 
