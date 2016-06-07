@@ -4,11 +4,11 @@ Toolkit for accessing data from the Insights for Weather Bluemix service.
 
 To learn more about how this toolkit can be used:
 
-[Apache Quarks, Watson, and Streaming Analytics: Saving the world, one smart sprinkler at a time](https://developer.ibm.com/bluemix/2016/06/01/better-analytics-with-apache-quarks/)
+* [Apache Quarks, Watson, and Streaming Analytics: Saving the world, one smart sprinkler at a time](https://developer.ibm.com/bluemix/2016/06/01/better-analytics-with-apache-quarks/)
 
 To watch this toolkit in action:
 
-[Water Conservation Application Demo](https://www.youtube.com/watch?v=Rvc1CqNJkOA)
+* [Water Conservation Application Demo](https://www.youtube.com/watch?v=Rvc1CqNJkOA)
 
 To learn more about Streams:
 
