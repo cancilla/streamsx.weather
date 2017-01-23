@@ -18,23 +18,12 @@ To learn more about Streams:
 * [StreamsDev](https://developer.ibm.com/streamsdev/)
 
 
-# Building toolkit for development
-
-To build this toolkit, you need to:
-
-1.  Install IBM Streams 4.1 and up
-2.  Install Gradle if necessary (https://docs.gradle.org/current/userguide/installation.html)
-3.  `cd com.ibm.streamsx.weather`
-4.  Run: `gradle build`
-5.  Import project into Streams Studio to build
-
 # Building toolkit
 To build this toolkit, you need to:
 
 1.  Install IBM Streams 4.1 and up
-2.  Install Gradle if necessary (https://docs.gradle.org/current/userguide/installation.html)
 3.  `cd com.ibm.streamsx.weather`
-4.  To build toolkit: `gradle build`
+4.  To build toolkit: `../gradlew build'
 
 # Building samples
 The build the samples, you need to:
@@ -42,4 +31,4 @@ The build the samples, you need to:
 1.  Install IBM Streams 4.1 and up
 2.  Install Gradle if necessary (https://docs.gradle.org/current/userguide/installation.html)
 3.  `cd samples`
-4.  Run: `gradle scCompile`
+4.  Run: `../gradlew build`
