@@ -1,38 +1,34 @@
-buildscript {
-    repositories { jcenter() }
-	dependencies { classpath files('../../ext/gradle-spl-plugin-1.0.0-SNAPSHOT.jar') }
+apply plugin: 'java'
+apply from: '../../common.gradle'
+
+def STREAMS_INSTALL = System.getenv("STREAMS_INSTALL")
+def WEATHER_TOOLKIT = '../../com.ibm.streamsx.weather'
+
+task buildWeatherToolkit(type: GradleBuild) {
+    buildFile = '../../com.ibm.streamsx.weather/build.gradle'
+    tasks = ['build']
 }
 
-apply plugin: 'streamsx.build'
-
-dependencies {
-	toolkit files('../../com.ibm.streamsx.weather')
+task buildSamples(dependsOn: ['buildWeatherToolkit']) {
+    doLast {
+        def toolkitPath = WEATHER_TOOLKIT
+        compileApp('com.ibm.streamsx.weather.sample', 'LocationServicesGeocodeSample', toolkitPath)
+        compileApp('com.ibm.streamsx.weather.sample', 'LocationServicesIATACodeSample', toolkitPath)
+        compileApp('com.ibm.streamsx.weather.sample', 'LocationServicesICAOCodeSample', toolkitPath)
+        compileApp('com.ibm.streamsx.weather.sample', 'LocationServicesPostalKeySample', toolkitPath)
+        compileApp('com.ibm.streamsx.weather.sample', 'LocationServicesSearchSample', toolkitPath)
+    }
 }
 
-streamsBuildConfig {
-  scCompile {
-    namespace = 'com.ibm.streamsx.weather.sample'
-    composite = 'LocationServicesGeocodeSample'
-    outputDirectory = 'output/' + composite
-  }
-  scCompile {
-    namespace = 'com.ibm.streamsx.weather.sample'
-    composite = 'LocationServicesIATACodeSample'
-    outputDirectory = 'output/' + composite
-  }
-  scCompile {
-    namespace = 'com.ibm.streamsx.weather.sample'
-    composite = 'LocationServicesICAOCodeSample'
-    outputDirectory = 'output/' + composite
-  }
-  scCompile {
-    namespace = 'com.ibm.streamsx.weather.sample'
-    composite = 'LocationServicesPostalKeySample'
-    outputDirectory = 'output/' + composite
-  }
-  scCompile {
-    namespace = 'com.ibm.streamsx.weather.sample'
-    composite = 'LocationServicesSearchSample'
-    outputDirectory = 'output/' + composite
-  }      
+task cleanApps() {
+    doLast {
+        cleanApp('com.ibm.streamsx.weather.sample', 'LocationServicesGeocodeSample')
+        cleanApp('com.ibm.streamsx.weather.sample', 'LocationServicesIATACodeSample')
+        cleanApp('com.ibm.streamsx.weather.sample', 'LocationServicesICAOCodeSample')
+        cleanApp('com.ibm.streamsx.weather.sample', 'LocationServicesPostalKeySample')
+        cleanApp('com.ibm.streamsx.weather.sample', 'LocationServicesSearchSample')
+    }
 }
+
+build.dependsOn buildSamples
+clean.dependsOn cleanApps 

@@ -1,23 +1,28 @@
-buildscript {
-    repositories { jcenter() }
-	dependencies { classpath files('../../ext/gradle-spl-plugin-1.0.0-SNAPSHOT.jar') }
+apply plugin: 'java'
+apply from: '../../common.gradle'
+
+def STREAMS_INSTALL = System.getenv("STREAMS_INSTALL")
+def WEATHER_TOOLKIT = '../../com.ibm.streamsx.weather'
+
+task buildWeatherToolkit(type: GradleBuild) {
+    buildFile = '../../com.ibm.streamsx.weather/build.gradle'
+    tasks = ['build']
 }
 
-apply plugin: 'streamsx.build'
-
-dependencies {
-	toolkit files('../../com.ibm.streamsx.weather')
+task buildSamples(dependsOn: ['buildWeatherToolkit']) {
+    doLast {
+        def toolkitPath = WEATHER_TOOLKIT
+        compileApp('com.ibm.streamsx.weather.sample', 'CurrentConditionsGeocodeSample', toolkitPath)
+        compileApp('com.ibm.streamsx.weather.sample', 'CurrentConditionsLocationIdSample', toolkitPath)
+    }
 }
 
-streamsBuildConfig {
-  scCompile {
-    namespace = 'com.ibm.streamsx.weather.sample'
-    composite = 'CurrentConditionsGeocodeSample'
-    outputDirectory = 'output/' + composite
-  }
-  scCompile {
-    namespace = 'com.ibm.streamsx.weather.sample'
-    composite = 'CurrentConditionsLocationIdSample'
-    outputDirectory = 'output/' + composite
-  }
+task cleanApps() {
+    doLast {
+        cleanApp('com.ibm.streamsx.weather.sample', 'CurrentConditionsGeocodeSample')
+        cleanApp('com.ibm.streamsx.weather.sample', 'CurrentConditionsLocationIdSample')
+    }
 }
+
+build.dependsOn buildSamples
+clean.dependsOn cleanApps 
