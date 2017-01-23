@@ -1,0 +1,9 @@
+namespace com.ibm.streamsx.weather;
+
+/*
+ * IntradayForecast operator type
+ */
+
+type IntradayForecasts_T = Metadata_T metadata, list<Intra_Forecast_T> forecasts;
+type Intra_Forecast_T = int64 wdir, int64 num, rstring phrase_12char, rstring fcst_valid_local, rstring dow, int64 pop, int64 clds, rstring daypart_name, int64 expire_time_gmt, rstring class_, rstring phrase_32char, int64 temp, rstring subphrase_pt1, int64 fcst_valid, rstring precip_type, int64 wspd, rstring subphrase_pt3, int64 icon_code, rstring subphrase_pt2, int64 icon_extd, rstring phrase_22char, int64 rh, rstring wdir_cardinal, rstring qualifier, rstring qualifier_code;
+

@@ -1,0 +1,9 @@
+namespace com.ibm.streamsx.weather;
+
+/*
+ * LocationServices operator types
+ */
+
+type LocationServices_T = Location_T location;
+type Location_T = list<rstring> country, list<rstring> address, list<rstring> city, list<rstring> adminDistrictCode, list<rstring> displayName, list<float64> latitude, list<rstring> postalCode, list<rstring> placeId, list<Locale_T> locale, list<rstring> postalKey, list<rstring> countryCode, list<rstring> adminDistrict, list<rstring> neighborhood, list<float64> longitude;
+type Locale_T = rstring locale4, rstring locale3, rstring locale2, rstring locale1;

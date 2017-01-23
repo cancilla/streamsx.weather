@@ -1,0 +1,6 @@
+/output/
+/.apt_generated/
+/.settings/
+/.toolkitList
+/toolkit.xml
+/.gradle/

@@ -1,0 +1,39 @@
+namespace com.ibm.streamsx.weather.sample ;
+
+use com.ibm.streamsx.weather::* ;
+
+composite AlmanacServicesGeocodeSample
+{
+	graph
+		(stream<float64 latitude, float64 longitude> Beacon_1_out0) as Beacon_1 =
+			Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : latitude = 33.40, longitude = - 83.42 ;
+		}
+
+		() as Custom_3 = Custom(AlmanacServices_3_out0 as inputStream)
+		{
+			logic
+				onTuple inputStream :
+				{
+					println(inputStream) ;
+				}
+
+		}
+
+		(stream<AlmanacServices_T result> AlmanacServices_3_out0) as
+			AlmanacServices_3 = AlmanacServices(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username") ;
+				password : getSubmissionTimeValue("password") ;
+				frequency : Daily ;
+				start : getSubmissionTimeValue("start", "0101") ;
+				end : getSubmissionTimeValue("end", "0103") ;
+				targetAttr : "result" ;
+		}
+
+}

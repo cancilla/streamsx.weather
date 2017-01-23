@@ -1,0 +1,8 @@
+namespace com.ibm.streamsx.weather;
+
+/*
+ * HourlyForecast operator type
+ */
+
+type HourlyForecast_T = Metadata_T metadata, list<Hour_Forecast_T> forecasts;
+type Hour_Forecast_T = int64 hi, int64 wdir, int64 num, rstring phrase_12char, rstring fcst_valid_local, int64 wc, rstring dow, int64 uv_warning, int64 pop, rstring uv_desc, int64 snow_qpf, int64 uv_index, int64 clds, float64 mslp, int64 expire_time_gmt, rstring wxman, rstring class_, rstring phrase_32char, rstring golf_category, int64 severity, int64 vis, int64 temp, float64 uv_index_raw, rstring subphrase_pt1, int64 qpf, int64 fcst_valid, rstring precip_type, int64 wspd, int64 dewpt, rstring subphrase_pt3, int64 icon_code, rstring subphrase_pt2, int64 feels_like, int64 icon_extd, rstring phrase_22char, int64 rh, rstring wdir_cardinal, rstring day_ind, int64 gust, int64 golf_index;

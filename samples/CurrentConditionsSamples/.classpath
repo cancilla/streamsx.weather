@@ -8,10 +8,5 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="opt/downloaded/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="opt/downloaded/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="opt/downloaded/fluent-hc-4.5.2.jar"/>
-	<classpathentry kind="lib" path="opt/downloaded/httpclient-4.5.2.jar"/>
-	<classpathentry kind="lib" path="opt/downloaded/httpcore-4.4.4.jar"/>
 	<classpathentry kind="output" path="impl/java/bin"/>
 </classpath>

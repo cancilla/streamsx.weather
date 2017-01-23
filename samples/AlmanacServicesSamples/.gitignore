@@ -1,0 +1,7 @@
+*.toolkitList
+/output/
+/.apt_generated/
+/.settings/
+/toolkit.xml
+/.gradle/
+/.build.gradle.swp

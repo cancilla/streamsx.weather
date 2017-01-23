@@ -1,0 +1,34 @@
+namespace com.ibm.streamsx.weather.sample;
+
+use com.ibm.streamsx.weather::* ;
+
+composite CurrentConditionsGeocodeSample {
+	graph
+		(stream<float64 latitude, float64 longitude> Beacon_1_out0) as Beacon_1 =
+			Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : latitude = 33.40, longitude = - 83.42 ;
+		}
+
+		() as Custom_3 = Custom(CurrentConditionsForecast_3_out0 as inputStream)
+		{
+			logic
+				onTuple inputStream :
+				{
+					println(inputStream) ;
+				}
+
+		}
+
+		(stream<CurrentConditions_T result> CurrentConditionsForecast_3_out0) as CurrentConditionsForecast_3 =
+			CurrentConditions(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username");
+				password : getSubmissionTimeValue("password") ;
+				targetAttr : "result";
+		}
+}

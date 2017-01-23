@@ -1,0 +1,31 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies { classpath files('../ext/gradle-spl-plugin-1.0.0-SNAPSHOT.jar') }
+}
+
+apply plugin: 'streamsx.build'
+
+repositories { mavenCentral() }
+
+dependencies {
+    compile group: 'org.apache.httpcomponents', name: 'fluent-hc', version: '4.5.2'
+}
+
+task getDeps(type: Copy) {
+  from configurations.runtime
+  into 'opt/downloaded'
+  exclude '*streams*'
+}
+
+task copyJarToImpl(type: Copy) {
+    from fileTree(dir : 'build/libs', include : ['*.jar'])
+    into 'impl/lib'
+}
+
+task deleteDeps {
+    delete fileTree(dir: 'opt/downloaded', include: ['*'])
+    delete fileTree(dir: 'impl/lib', include: ['*.jar'])
+    delete 'impl/java/bin'
+}
+
+build.dependsOn getDeps

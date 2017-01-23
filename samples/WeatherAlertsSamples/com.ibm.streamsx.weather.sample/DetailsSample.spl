@@ -1,0 +1,36 @@
+namespace com.ibm.streamsx.weather.sample ;
+
+use com.ibm.streamsx.weather::* ;
+
+composite DetailsSample
+{
+	graph
+		(stream<rstring detailKey> Beacon_1_out0) as Beacon_1 = Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : detailKey = "91a30505-c7a8-38d1-bf6a-5744deb49e67" ;
+		}
+
+		(stream<WeatherAlerts_Details_T result> Out0) as WeatherAlerts_2 =
+			WeatherAlerts(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username");
+				password : getSubmissionTimeValue("password") ;
+				targetAttr : "result" ;
+				apiType : Details ;
+		}
+
+		() as Custom_3 = Custom(Out0 as inputStream)
+		{
+			logic
+				onTuple inputStream :
+				{
+					println(inputStream);
+				}
+
+		}
+
+}

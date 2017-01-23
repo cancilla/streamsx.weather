@@ -1,0 +1,36 @@
+namespace com.ibm.streamsx.weather.sample;
+
+use com.ibm.streamsx.weather::* ;
+
+composite LocationServicesPostalKeySample
+{
+	graph
+		(stream<rstring postalKey> Beacon_1_out0) as Beacon_1 = Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : postalKey = "30339:US" ;
+		}
+
+		(stream<LocationServices_T result> LocationServices_2_out0) as LocationServices_2 =
+			LocationServices(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username") ;
+				password : getSubmissionTimeValue("password") ;
+				lookupType : PostalKey ;
+				targetAttr : "result" ;
+		}
+
+		() as Custom_3 = Custom(LocationServices_2_out0 as inputStream)
+		{
+			logic
+				onTuple LocationServices_2_out0 :
+				{
+					println(inputStream) ;
+				}
+
+		}
+
+}

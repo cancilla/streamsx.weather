@@ -1,0 +1,15 @@
+namespace com.ibm.streamsx.weather;
+
+/*
+ * WeatherAlerts Operator Types
+ */
+
+type WeatherAlerts_Details_T = list<Alert_T> alertDetail, Metadata_T metadata;
+type WeatherAlerts_T = list<Alert_T> alerts, Metadata_T metadata;
+
+type Alert_T = rstring certainty, int64 certainty_cd, rstring detail_key, rstring effective_dt_tm_local, rstring effective_dt_tm_tz_abbrv, rstring expire_dt_tm_local, rstring expire_dt_tm_tz_abbrv, int64 expire_time_gmt, rstring onset_dt_tm_local, rstring onset_dt_tm_tz_abbrv, rstring urgency, int64 urgency_cd, rstring area_name, rstring issue_dt_tm_tz_abbrv, int64 severity_cd, float64 lon, rstring source, rstring area_id, rstring pil, int64 msg_type_cd, rstring proc_dt_tm_tz_abbrv, rstring proc_dt_tm_local, list<Category_T> categories, list<TextInfo_T> text, rstring issue_dt_tm_local, rstring class_, rstring key, rstring etn, float64 lat, rstring disclaimer, rstring severity, rstring identifier, rstring cntry_cd, rstring headline_text, rstring st_name, rstring office_cntry_cd, rstring office_cd, rstring area_type, Flood_T flood, rstring significance, rstring event_desc, rstring office_name, list<Polygon_T> polygon, rstring st_cd, rstring office_st_cd, rstring msg_type, rstring phenomena, rstring cntry_name, list<Response_T> response_types;
+type Category_T = int64 category_cd, rstring category;
+type TextInfo_T = rstring language_cd, rstring overview, rstring instruction, rstring description;
+type Flood_T = rstring fld_location_id, rstring fld_start_dt_tm_local, rstring fld_immediate_cause_cd, rstring fld_end_dt_tm_tz_abbrv, rstring fld_severity, rstring fld_record_status_cd, rstring fld_crest_dt_tm_local, rstring fld_immediate_cause, rstring fld_crest_dt_tm_tz_abbrv, rstring fld_location_name, rstring fld_end_dt_tm_local, rstring fld_severity_cd, rstring fld_start_dt_tm_tz_abbrv, rstring fld_record_status;
+type Polygon_T = float64 lon, float64 lat;
+type Response_T = rstring effective_dt_tm_local, rstring expire_dt_tm_local, rstring response_type, rstring certainty, rstring expire_dt_tm_tz_abbrv, int64 certainty_cd, int64 urgency_cd, rstring onset_dt_tm_tz_abbrv, int64 response_type_cd, rstring urgency, rstring effective_dt_tm_tz_abbrv, int64 expire_time_gmt, rstring onset_dt_tm_local;

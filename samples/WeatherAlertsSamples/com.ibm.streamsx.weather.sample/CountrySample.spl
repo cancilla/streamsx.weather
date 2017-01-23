@@ -1,0 +1,35 @@
+namespace com.ibm.streamsx.weather.sample ;
+
+use com.ibm.streamsx.weather::* ;
+
+composite CountrySample
+{
+	graph
+		(stream<rstring countryCode> Beacon_1_out0) as Beacon_1 = Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : countryCode = "CA" ;
+		}
+
+		(stream<WeatherAlerts_T result> WeatherAlerts_Out) as WeatherAlerts_2 =
+			WeatherAlerts(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username");
+				password : getSubmissionTimeValue("password") ;
+				targetAttr : "result" ;
+		}
+
+		() as Custom_3 = Custom(WeatherAlerts_Out as inputStream)
+		{
+			logic
+				onTuple inputStream :
+				{
+					println(inputStream);
+				}
+
+		}
+
+}

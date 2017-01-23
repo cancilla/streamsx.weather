@@ -23,15 +23,23 @@ To learn more about Streams:
 To build this toolkit, you need to:
 
 1.  Install IBM Streams 4.1 and up
-2.  Set MAVEN environment variable:  `export M2_HOME=<maven install location>`
-3.  cd com.ibm.streamsx.weather
-4.  Download required build dependencies:  `ant maven-deps`
+2.  Install Gradle if necessary (https://docs.gradle.org/current/userguide/installation.html)
+3.  `cd com.ibm.streamsx.weather`
+4.  Run: `gradle build`
 5.  Import project into Streams Studio to build
 
 # Building toolkit
 To build this toolkit, you need to:
 
 1.  Install IBM Streams 4.1 and up
-2.  Set MAVEN environment variable:  `export M2_HOME=<maven install location>`
-3.  cd com.ibm.streamsx.weather
-4.  To build toolkit:  `ant`
+2.  Install Gradle if necessary (https://docs.gradle.org/current/userguide/installation.html)
+3.  `cd com.ibm.streamsx.weather`
+4.  To build toolkit: `gradle build`
+
+# Building samples
+The build the samples, you need to:
+
+1.  Install IBM Streams 4.1 and up
+2.  Install Gradle if necessary (https://docs.gradle.org/current/userguide/installation.html)
+3.  `cd samples`
+4.  Run: `gradle scCompile`

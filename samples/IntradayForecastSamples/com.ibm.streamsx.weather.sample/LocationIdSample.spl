@@ -1,0 +1,36 @@
+namespace com.ibm.streamsx.weather.sample ;
+
+use com.ibm.streamsx.weather::* ;
+
+composite IntradayForecastLocationIdSample
+{
+	graph
+		(stream<rstring locationId> Beacon_1_out0) as Beacon_1 = Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : locationId = "30339:4:US" ;
+		}
+
+		() as Custom_3 = Custom(IntradayForecast_3_out0 as inputStream)
+		{
+			logic
+				onTuple inputStream :
+				{
+					println(inputStream) ;
+				}
+
+		}
+
+		(stream<IntradayForecasts_T results> IntradayForecast_3_out0) as IntradayForecast_3 =
+			IntradayForecast(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username") ;
+				password : getSubmissionTimeValue("password") ;
+				forecastDays : (int32)getSubmissionTimeValue("forecastDays") ;
+				targetAttr : "result" ;
+		}
+
+}

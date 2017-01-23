@@ -1,0 +1,1 @@
+include 'AlmanacServicesSamples', 'CurrentConditionsSamples', 'DailyForecastSamples', 'HistoricalDataSamples', 'HourlyForecastSamples', 'IntradayForecastSamples', 'LocationServicesSamples', 'WeatherAlertsSamples'

@@ -1,0 +1,35 @@
+namespace com.ibm.streamsx.weather.sample;
+
+use com.ibm.streamsx.weather::* ;
+
+composite HistoricalDataLocationIdSample {
+	graph
+		(stream<rstring locationId> Beacon_1_out0) as Beacon_1 =
+			Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : locationId = "30339:4:US";
+		}
+
+		() as Custom_3 = Custom(HistoricalDataForecastLocation_3_out0 as inputStream)
+		{
+			logic
+				onTuple inputStream :
+				{
+					println(inputStream) ;
+				}
+
+		}
+
+		(stream<HistoricalData_T result> HistoricalDataForecastLocation_3_out0) as HistoricalDataForecast_3 =
+			HistoricalData(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username") ;
+				password : getSubmissionTimeValue("password") ;
+				hours : (int32)getSubmissionTimeValue("hours", "3");
+				targetAttr : "result";
+		}
+}

@@ -1,0 +1,6 @@
+namespace com.ibm.streamsx.weather;
+
+type AlmanacServices_T = list<Almanac_Summaries_T> almanac_summaries, Metadata_T metadata;
+
+type Almanac_Summaries_T = rstring station_name, int64 avg_lo, rstring station_id, int64 record_lo_yr, float64 avg_precip, int64 record_lo, int64 record_hi_yr, int64 mean_temp, float64 avg_snow, int64 record_period, rstring almanac_dt, int64 record_hi, rstring interval, int64 avg_hi, rstring class_;
+

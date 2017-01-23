@@ -1,0 +1,23 @@
+buildscript {
+    repositories { jcenter() }
+	dependencies { classpath files('../../ext/gradle-spl-plugin-1.0.0-SNAPSHOT.jar') }
+}
+
+apply plugin: 'streamsx.build'
+
+dependencies {
+	toolkit files('../../com.ibm.streamsx.weather')
+}
+
+streamsBuildConfig {
+  scCompile {
+    namespace = 'com.ibm.streamsx.weather.sample'
+    composite = 'DailyForecastGeocodeSample'
+    outputDirectory = 'output/' + composite
+  }
+  scCompile {
+    namespace = 'com.ibm.streamsx.weather.sample'
+    composite = 'DailyForecastLocationIdSample'
+    outputDirectory = 'output/' + composite
+  }
+}

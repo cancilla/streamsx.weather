@@ -1,0 +1,4 @@
+*.toolkitList
+/output/
+/.apt_generated/
+/.gradle/

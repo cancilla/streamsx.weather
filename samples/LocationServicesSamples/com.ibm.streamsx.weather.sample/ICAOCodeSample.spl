@@ -1,0 +1,36 @@
+namespace com.ibm.streamsx.weather.sample;
+
+use com.ibm.streamsx.weather::* ;
+
+composite LocationServicesICAOCodeSample
+{
+	graph
+		(stream<rstring icaoCode> Beacon_1_out0) as Beacon_1 = Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : icaoCode = "KATL" ;
+		}
+
+		(stream<LocationServices_T result> LocationServices_2_out0) as LocationServices_2 =
+			LocationServices(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username") ;
+				password : getSubmissionTimeValue("password") ;
+				lookupType : ICAOCode ;
+				targetAttr : "result" ;
+		}
+
+		() as Custom_3 = Custom(LocationServices_2_out0 as inputStream)
+		{
+			logic
+				onTuple LocationServices_2_out0 :
+				{
+					println(inputStream) ;
+				}
+
+		}
+
+}

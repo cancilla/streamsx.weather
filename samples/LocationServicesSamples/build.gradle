@@ -1,0 +1,38 @@
+buildscript {
+    repositories { jcenter() }
+	dependencies { classpath files('../../ext/gradle-spl-plugin-1.0.0-SNAPSHOT.jar') }
+}
+
+apply plugin: 'streamsx.build'
+
+dependencies {
+	toolkit files('../../com.ibm.streamsx.weather')
+}
+
+streamsBuildConfig {
+  scCompile {
+    namespace = 'com.ibm.streamsx.weather.sample'
+    composite = 'LocationServicesGeocodeSample'
+    outputDirectory = 'output/' + composite
+  }
+  scCompile {
+    namespace = 'com.ibm.streamsx.weather.sample'
+    composite = 'LocationServicesIATACodeSample'
+    outputDirectory = 'output/' + composite
+  }
+  scCompile {
+    namespace = 'com.ibm.streamsx.weather.sample'
+    composite = 'LocationServicesICAOCodeSample'
+    outputDirectory = 'output/' + composite
+  }
+  scCompile {
+    namespace = 'com.ibm.streamsx.weather.sample'
+    composite = 'LocationServicesPostalKeySample'
+    outputDirectory = 'output/' + composite
+  }
+  scCompile {
+    namespace = 'com.ibm.streamsx.weather.sample'
+    composite = 'LocationServicesSearchSample'
+    outputDirectory = 'output/' + composite
+  }      
+}

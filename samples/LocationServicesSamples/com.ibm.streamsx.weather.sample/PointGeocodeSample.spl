@@ -1,0 +1,38 @@
+namespace com.ibm.streamsx.weather.sample;
+
+use com.ibm.streamsx.weather::* ;
+
+composite LocationServicesGeocodeSample
+{
+	graph
+		(stream<float64 latitude, float64 longitude> Beacon_1_out0) as Beacon_1 =
+			Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : latitude = 33.40, longitude = - 83.42 ;
+		}
+
+
+		(stream<LocationServices_T result> LocationServices_2_out0) as LocationServices_2 =
+			LocationServices(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username") ;
+				password : getSubmissionTimeValue("password") ;
+				lookupType : Geocode ;
+				targetAttr : "result" ;
+		}
+
+		() as Custom_3 = Custom(LocationServices_2_out0 as inputStream)
+		{
+			logic
+				onTuple LocationServices_2_out0 :
+				{
+					println(inputStream) ;
+				}
+
+		}
+
+}

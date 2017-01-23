@@ -1,0 +1,37 @@
+namespace com.ibm.streamsx.weather.sample ;
+
+use com.ibm.streamsx.weather::* ;
+
+composite CountryAreaSample
+{
+	graph
+		(stream<rstring countryCode, rstring areaId> Beacon_1_out0) as Beacon_1 =
+			Beacon()
+		{
+			param
+				iterations : 1u ;
+			output
+				Beacon_1_out0 : countryCode = "US", areaId = "GAC289" ;
+		}
+
+		(stream<WeatherAlerts_T result> Out0) as WeatherAlerts_2 =
+			WeatherAlerts(Beacon_1_out0)
+		{
+			param
+				username : getSubmissionTimeValue("username");
+				password : getSubmissionTimeValue("password") ;
+				targetAttr : "result" ;
+				apiType : CountryAreaAlert ;
+		}
+
+		() as Custom_3 = Custom(Out0 as inputStream)
+		{
+			logic
+				onTuple inputStream :
+				{
+					println(inputStream);
+				}
+
+		}
+
+}
